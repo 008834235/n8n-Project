@@ -1,0 +1,699 @@
+{
+  "active": false,
+  "connections": {
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Check the Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create A Song": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check the Status": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Download the Song",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download the Song": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Instrumental",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Title",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Genre",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Instrumental",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Prompt",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instrumental": {
+      "main": [
+        [
+          {
+            "node": "Title",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Title": {
+      "main": [
+        [
+          {
+            "node": "Genre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Genre": {
+      "main": [
+        [
+          {
+            "node": "Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Create A Song",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-26T20:27:21.579Z",
+  "id": "GmxFakhyA9e8I0qN",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "n8n Suno",
+  "nodes": [
+    {
+      "parameters": {
+        "name": "New Song",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH",
+          "mode": "list",
+          "cachedResultName": "Suno Songs",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1952,
+        -176
+      ],
+      "id": "96cee3f7-1a09-4ac7-862c-d9a1c5599a75",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "P44rKTJbgNvCuX9g",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        -160
+      ],
+      "id": "725de00b-625c-4695-b141-b08271bb045f",
+      "name": "Wait",
+      "webhookId": "7ed210ee-8611-41db-9857-dd55945af9b7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer a92ceae8fa140a285bad4a786f2ccbed"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "prompt",
+              "value": "={{ $json.Prompt }}"
+            },
+            {
+              "name": "style",
+              "value": "={{ $json.Genre }}"
+            },
+            {
+              "name": "title",
+              "value": "={{ $json.Title }}"
+            },
+            {
+              "name": "customMode",
+              "value": "true"
+            },
+            {
+              "name": "instrumental",
+              "value": "={{ $json.Instrumental }}"
+            },
+            {
+              "name": "model",
+              "value": "V3_5"
+            },
+            {
+              "name": "callBackUrl",
+              "value": "https://api.example.com/callback"
+            },
+            {
+              "name": "negativeTags"
+            },
+            {
+              "name": "vocalGender",
+              "value": "m"
+            },
+            {
+              "name": "styleWeight",
+              "value": "0.65"
+            },
+            {
+              "name": "weirdnessConstraint",
+              "value": "0.65"
+            },
+            {
+              "name": "audioWeight",
+              "value": "0.65"
+            },
+            {
+              "name": "personaId",
+              "value": "persona_123"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        544,
+        -160
+      ],
+      "id": "c5d99ba4-cd2a-4763-a3c0-e17e44c2b09d",
+      "name": "Create A Song"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kie.ai/api/v1/generate/record-info",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer a92ceae8fa140a285bad4a786f2ccbed"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        976,
+        -160
+      ],
+      "id": "06c36961-3a34-4349-9adc-add76222f67d",
+      "name": "Check the Status"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "SUCCESS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "9cb49e35-5253-419d-944f-3cedd8600a2e"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "25d56eb3-e5a4-4807-aa5c-711b972182b8",
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "PENDING",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "116274cb-ff31-45b0-b64c-8931eee4feae",
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "TEXT_SUCCESS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1de65978-8839-4823-82c9-eda8918885d1",
+                    "leftValue": "={{ $json.data.status }}",
+                    "rightValue": "FIRST_SUCCESS",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1184,
+        -160
+      ],
+      "id": "5701f301-61f7-4f4a-9e78-7343d3eb3b07",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data.response.sunoData[0].sourceAudioUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1744,
+        -176
+      ],
+      "id": "35863ae4-e37f-46de-a093-0b7165f0299e",
+      "name": "Download the Song"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1952,
+        272
+      ],
+      "id": "2fa9fc4c-1e1f-4bf8-8382-59928e10c62b",
+      "name": "When chat message received",
+      "webhookId": "5221bc36-6642-4477-ba0f-9aa72c8678b2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are an AI agent acting as a music creator. \nTask:\n1. Read the user input as if it were a description of a song idea. \n2. Imagine what a suitable, creative song title would be. \n3. Output only the title in plain text. \n4. Do not include JSON, markdown, explanations, or any extra formatting. \n\nExample:\nInput: \"A story about a knight who saves a village from a dragon.\"\nOutput: {\"title\":\"Knight Saves Village from Dragon\"}\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1264,
+        96
+      ],
+      "id": "80bebd8d-0743-4939-a86a-0e6086919b6f",
+      "name": "Title",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        288
+      ],
+      "id": "a8798b55-1d06-426c-b661-3b569b0c24b0",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "okZs601VKecnhRpI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        640
+      ],
+      "id": "9e087111-12f0-433b-8dca-5c905e50d3bd",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "okZs601VKecnhRpI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are an AI agent acting as a music creator. \nTask:\n1. Read the user input as if it were a description of a song idea. \n2. Determine the most suitable musical genre (e.g., rock, pop, jazz, synthwave, classical). \n3. Output only the genre in plain text. \n4. Do not include JSON, markdown, explanations, or any extra formatting. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1264,
+        448
+      ],
+      "id": "b89a1bf8-582d-4f50-bfd5-f475ead082d0",
+      "name": "Genre",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        -64
+      ],
+      "id": "0a7384fb-3571-4c9c-9953-2c5567b666a9",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "okZs601VKecnhRpI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI agent acting as a music creator. \nTask:\n1. Read the user input as a description of a song idea. \n2. Determine if the music would be instrumental only (no vocals). \n3. Output only \"true\" if instrumental, or \"false\" if not. \n4. Do not include JSON, markdown, explanations, or any extra formatting. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1264,
+        -256
+      ],
+      "id": "29127067-05da-4a51-a137-b4f1b22dde36",
+      "name": "Instrumental",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        992
+      ],
+      "id": "fa839db8-8fe6-4d6c-939b-1092324ff9d5",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "okZs601VKecnhRpI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are an AI agent acting as a music composer. \nTask:\n1. Read the user input as a description of a song idea. \n2. Transform it into a concise composer’s prompt that captures mood, style, and instrumentation. \n3. Output only the composer’s prompt in plain text. \n4. Do not include JSON, markdown, or extra explanation. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1264,
+        800
+      ],
+      "id": "259078a8-ba13-4cab-925b-65adbebb343d",
+      "name": "Prompt",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8519f6ad-d368-46bf-8ede-aca2ee48b326",
+              "name": "Instrumental",
+              "value": "={{ $node[\"Instrumental\"].json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "9ef30ecb-54a0-4c65-b971-084c5a555207",
+              "name": "Title",
+              "value": "={{ $node[\"Title\"].json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "6f826544-83ae-4549-8708-8fd09faca471",
+              "name": "Genre",
+              "value": "={{ $node[\"Genre\"].json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "748703ad-f462-4817-b36f-08cfa3bac032",
+              "name": "Prompt",
+              "value": "={{ $node[\"Prompt\"].json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -304,
+        288
+      ],
+      "id": "65c273e3-6130-4f31-993f-87d775035798",
+      "name": "Edit Fields",
+      "retryOnFail": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-26T20:27:21.581Z",
+      "createdAt": "2025-11-26T20:27:21.581Z",
+      "role": "workflow:owner",
+      "workflowId": "GmxFakhyA9e8I0qN",
+      "projectId": "IFQa0QO9npFMEMmz"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-27T04:26:02.000Z",
+  "versionId": "e9948071-5cc4-46ff-a303-b630797b4943"
+}
