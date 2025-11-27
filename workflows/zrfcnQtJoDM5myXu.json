@@ -1,0 +1,201 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "ComfyUI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ComfyUI": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-26T18:25:46.792Z",
+  "id": "zrfcnQtJoDM5myXu",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "n8n ComfyUI",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7c2e3ede-7b08-4054-8e47-ecd76d6a553f",
+      "name": "When chat message received",
+      "webhookId": "5221bc36-6642-4477-ba0f-9aa72c8678b2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "## Role\nThe agent is a Description Generator. Its purpose is to take user inputs (objects, ideas, scenarios, or people) and produce concise, detailed plain-text descriptions. The descriptions should be engaging, informative, and limited to a maximum of five sentences.\n\n## Instructions\n- Accept any user input as the subject of description.\n- Write in plain text only, without formatting symbols, line breaks, or special characters like \\n.\n- Keep the description between 3–5 sentences.\n- Focus on clarity, detail, and vividness while remaining concise.\n- Avoid repetition or filler words.\n\n## Example\nUser Input: \"A red bicycle\"\nAgent Output: The red bicycle gleams with a glossy finish that catches the sunlight. Its frame is sturdy yet lightweight, designed for both speed and comfort. Black tires with deep treads promise smooth rides across city streets or rugged paths. The handlebars curve slightly, offering a balanced grip for long journeys. A small silver bell adds a cheerful touch to its practical design.\n\nWould you like me to also create a template prompt you can reuse to instruct the agent each time, so you don’t have to repeat the rules?\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "46d31f96-c39f-49ed-8cf5-27657e416d10",
+      "name": "AI Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "5fdbe4c8-4e5e-4e5d-86e0-8282a2332c06",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "b70ad261-aa0a-41c9-b234-c337ff2bf195",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "okZs601VKecnhRpI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflow": "={\n  \"5\": {\n    \"inputs\": {\n      \"width\": 512,\n      \"height\": 512,\n      \"batch_size\": 1\n    },\n    \"class_type\": \"EmptyLatentImage\",\n    \"_meta\": {\n      \"title\": \"Empty Latent Image\"\n    }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"text\": \" {{ $json.output }} \",\n      \"clip\": [\n        \"20\",\n        1\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP Text Encode (Prompt)\"\n    }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"text\": \"text, watermark\",\n      \"clip\": [\n        \"20\",\n        1\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP Text Encode (Prompt)\"\n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"samples\": [\n        \"29\",\n        0\n      ],\n      \"vae\": [\n        \"20\",\n        2\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": {\n      \"title\": \"VAE Decode\"\n    }\n  },\n  \"13\": {\n    \"inputs\": {\n      \"add_noise\": true,\n      \"noise_seed\": 334760907172262,\n      \"cfg\": 1,\n      \"model\": [\n        \"20\",\n        0\n      ],\n      \"positive\": [\n        \"6\",\n        0\n      ],\n      \"negative\": [\n        \"7\",\n        0\n      ],\n      \"sampler\": [\n        \"14\",\n        0\n      ],\n      \"sigmas\": [\n        \"22\",\n        0\n      ],\n      \"latent_image\": [\n        \"5\",\n        0\n      ]\n    },\n    \"class_type\": \"SamplerCustom\",\n    \"_meta\": {\n      \"title\": \"SamplerCustom\"\n    }\n  },\n  \"14\": {\n    \"inputs\": {\n      \"sampler_name\": \"euler_ancestral\"\n    },\n    \"class_type\": \"KSamplerSelect\",\n    \"_meta\": {\n      \"title\": \"KSamplerSelect\"\n    }\n  },\n  \"20\": {\n    \"inputs\": {\n      \"ckpt_name\": \"sd_xl_turbo_1.0_fp16.safetensors\"\n    },\n    \"class_type\": \"CheckpointLoaderSimple\",\n    \"_meta\": {\n      \"title\": \"Load Checkpoint\"\n    }\n  },\n  \"22\": {\n    \"inputs\": {\n      \"steps\": 3,\n      \"denoise\": 1,\n      \"model\": [\n        \"20\",\n        0\n      ]\n    },\n    \"class_type\": \"SDTurboScheduler\",\n    \"_meta\": {\n      \"title\": \"SDTurboScheduler\"\n    }\n  },\n  \"27\": {\n    \"inputs\": {\n      \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n        \"8\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\": \"Save Image\"\n    }\n  },\n  \"29\": {\n    \"inputs\": {\n      \"seed\": 263767148874217,\n      \"steps\": 20,\n      \"cfg\": 8,\n      \"sampler_name\": \"euler\",\n      \"scheduler\": \"beta\",\n      \"denoise\": 1,\n      \"model\": [\n        \"20\",\n        0\n      ],\n      \"positive\": [\n        \"6\",\n        0\n      ],\n      \"negative\": [\n        \"7\",\n        0\n      ],\n      \"latent_image\": [\n        \"13\",\n        0\n      ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"title\": \"KSampler\"\n    }\n  }\n}",
+        "timeout": 5
+      },
+      "type": "n8n-nodes-comfyui.comfyui",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "1f0671f8-1375-4243-a99f-4182482e0a72",
+      "name": "ComfyUI",
+      "credentials": {
+        "comfyUIApi": {
+          "id": "x7wtg7nHvix1Hvgm",
+          "name": "ComfyUI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "My New File",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH",
+          "mode": "list",
+          "cachedResultName": "Suno Songs",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        976,
+        0
+      ],
+      "id": "51e5952a-2862-4639-a313-6e88079be03c",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "P44rKTJbgNvCuX9g",
+          "name": "Google Drive account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-26T18:25:46.794Z",
+      "createdAt": "2025-11-26T18:25:46.794Z",
+      "role": "workflow:owner",
+      "workflowId": "zrfcnQtJoDM5myXu",
+      "projectId": "IFQa0QO9npFMEMmz"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-27T02:07:55.000Z",
+  "versionId": "c095d182-6f30-47ac-a23f-43fc5e4dd290"
+}
