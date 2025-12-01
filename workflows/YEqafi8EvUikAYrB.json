@@ -24,6 +24,11 @@
             "node": "Instrumental",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Create file from text",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -54,7 +59,7 @@
       "main": [
         [
           {
-            "node": "Upload file1",
+            "node": "Upload Picture",
             "type": "main",
             "index": 0
           }
@@ -235,12 +240,58 @@
           }
         ]
       ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Instrumental",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "Title",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "Genre",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory4": {
+      "ai_memory": [
+        [
+          {
+            "node": "Prompt",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-27T01:06:24.545Z",
   "id": "YEqafi8EvUikAYrB",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "n8n Finished Project",
   "nodes": [
     {
@@ -322,38 +373,6 @@
         "comfyUIApi": {
           "id": "x7wtg7nHvix1Hvgm",
           "name": "ComfyUI account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "name": "My New File",
-        "driveId": {
-          "__rl": true,
-          "mode": "list",
-          "value": "My Drive"
-        },
-        "folderId": {
-          "__rl": true,
-          "value": "1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH",
-          "mode": "list",
-          "cachedResultName": "Suno Songs",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        -672,
-        368
-      ],
-      "id": "f7ccbd0a-d3d6-4d18-aec6-9d7354f89e9f",
-      "name": "Upload file1",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "P44rKTJbgNvCuX9g",
-          "name": "Google Drive account 2"
         }
       }
     },
@@ -828,28 +847,121 @@
     },
     {
       "parameters": {
-        "resource": "message",
-        "guildId": {
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        -896
+      ],
+      "id": "784e5274-b6c5-4859-a817-0a00ab47cffb",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        -544
+      ],
+      "id": "6391f74b-9c6f-43ce-81b3-73ed1b482b9a",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        -192
+      ],
+      "id": "694a5f7c-b387-47ae-8ede-2f212f28cfbe",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        160
+      ],
+      "id": "d471a418-2755-4e88-8b14-dfe0de300de4",
+      "name": "Simple Memory4"
+    },
+    {
+      "parameters": {
+        "operation": "createFromText",
+        "content": "={{ $json.output }}",
+        "name": "Generated Text",
+        "driveId": {
           "__rl": true,
           "mode": "list",
-          "value": ""
+          "value": "My Drive"
         },
-        "channelId": {
+        "folderId": {
           "__rl": true,
+          "value": "1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "Suno Songs",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH"
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.discord",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
       "position": [
-        656,
-        48
+        1504,
+        560
       ],
-      "id": "504b6c91-014c-4002-9274-3e4b8e6589b6",
-      "name": "Send a message",
-      "webhookId": "a7dcc56f-2838-4a29-9edc-5d56d9e31185"
+      "id": "dbc7cffd-97b8-4ec3-a9ee-6cd989f93f69",
+      "name": "Create file from text",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "P44rKTJbgNvCuX9g",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Generated Picture",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH",
+          "mode": "list",
+          "cachedResultName": "Suno Songs",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1E47r72iPoH7dr6vF0g9wlCpr_A_0PhmH"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1504,
+        368
+      ],
+      "id": "f7ccbd0a-d3d6-4d18-aec6-9d7354f89e9f",
+      "name": "Upload Picture",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "P44rKTJbgNvCuX9g",
+          "name": "Google Drive account 2"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -868,6 +980,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-27T04:50:25.000Z",
-  "versionId": "b1ee6e62-4f64-4f72-83e1-c842fa39b12f"
+  "updatedAt": "2025-12-01T00:18:55.000Z",
+  "versionId": "c23e6d75-433c-4828-823f-c9a8bdf93975"
 }
