@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Ollama Agent",
             "type": "main",
             "index": 0
           }
@@ -284,6 +284,314 @@
           }
         ]
       ]
+    },
+    "Upload file": {
+      "main": [
+        []
+      ]
+    },
+    "Upload Picture": {
+      "main": [
+        []
+      ]
+    },
+    "Create file from text": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ollama Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory5": {
+      "ai_memory": [
+        [
+          {
+            "node": "Ollama Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File": {
+      "main": [
+        [
+          {
+            "node": "Merge Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If file too large": {
+      "main": [
+        [
+          {
+            "node": "Get File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Items": {
+      "main": [
+        [
+          {
+            "node": "isDiffOrNew",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "isDiffOrNew": {
+      "main": [
+        [
+          {
+            "node": "Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Status": {
+      "main": [
+        [
+          {
+            "node": "Same file - Do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "File is different",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "File is new",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Same file - Do nothing": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File is different": {
+      "main": [
+        [
+          {
+            "node": "Edit existing file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File is new": {
+      "main": [
+        [
+          {
+            "node": "Create new file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create new file": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit existing file": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get file data": {
+      "main": [
+        [
+          {
+            "node": "If file too large",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Get file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Merge Items",
+            "type": "main",
+            "index": 1
+          },
+          {
+            "node": "tag?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "/": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tag?": {
+      "main": [
+        [
+          {
+            "node": "/",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-27T01:06:24.545Z",
@@ -301,7 +609,7 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.4,
       "position": [
-        -1648,
+        -2192,
         368
       ],
       "id": "dd81b6ad-fa5c-439a-a7e4-16b7c17c8bab",
@@ -310,6 +618,8 @@
     },
     {
       "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
         "options": {
           "systemMessage": "## Role\nThe agent is a Description Generator. Its purpose is to take user inputs (objects, ideas, scenarios, or people) and produce concise, detailed plain-text descriptions. The descriptions should be engaging, informative, and limited to a maximum of five sentences.\n\n## Instructions\n- Accept any user input as the subject of description.\n- Write in plain text only, without formatting symbols, line breaks, or special characters like \\n.\n- Keep the description between 3–5 sentences.\n- Focus on clarity, detail, and vividness while remaining concise.\n- Avoid repetition or filler words.\n\n## Example\nUser Input: \"A red bicycle\"\nAgent Output: The red bicycle gleams with a glossy finish that catches the sunlight. Its frame is sturdy yet lightweight, designed for both speed and comfort. Black tires with deep treads promise smooth rides across city streets or rugged paths. The handlebars curve slightly, offering a balanced grip for long journeys. A small silver bell adds a cheerful touch to its practical design.\n\nWould you like me to also create a template prompt you can reuse to instruct the agent each time, so you don’t have to repeat the rules?\n"
         }
@@ -962,6 +1272,588 @@
           "name": "Google Drive account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "967512106033356850",
+          "mode": "list",
+          "cachedResultName": "Gym Bro Gym",
+          "cachedResultUrl": "https://discord.com/channels/967512106033356850"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1257821362542612491",
+          "mode": "list",
+          "cachedResultName": "painting",
+          "cachedResultUrl": "https://discord.com/channels/967512106033356850/1257821362542612491"
+        },
+        "content": "={{ $('AI Agent').item.json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        -96
+      ],
+      "id": "eebde6bd-b289-4ea7-b774-3d76e57c7518",
+      "name": "Send a message",
+      "webhookId": "11079617-a8e2-4066-b85d-5467e3cb064c",
+      "alwaysOutputData": false,
+      "credentials": {
+        "discordBotApi": {
+          "id": "cd3tLcnYpCSHRZAZ",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "alibayram/smollm3:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -1888,
+        544
+      ],
+      "id": "e37d9fa6-b0a0-436e-b77c-4bf10774569a",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "49MciclVAmMsZc7l",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1792,
+        672
+      ],
+      "id": "abe605c6-aef7-45d7-8654-45571df613a9",
+      "name": "Simple Memory5"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant.\n\nTake the users input and create a description of the input that will then be fed to an AI for prompt creation. "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1888,
+        368
+      ],
+      "id": "0ddebc33-9b33-4651-be1e-1a436f8c67ad",
+      "name": "Ollama Agent"
+    },
+    {
+      "parameters": {},
+      "id": "1d06fe50-2f92-4d27-8baf-03b2ccf12972",
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        -2208,
+        1632
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "480af443-5106-4946-90bd-544828519d0d",
+      "name": "n8n",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        -1952,
+        1712
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "hR0naEDOdQF8TOtm",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1d6bcd65-be2d-4e45-ae73-04b0b1091c74",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        -1744,
+        1728
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "id": "ab8567eb-3bf5-48b6-bc93-04c3c52da971",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -2208,
+        1824
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $workflow.id }}"
+        },
+        "workflowInputs": {
+          "value": {},
+          "schema": [],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "2af87709-2335-426f-8624-0359496991e3",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        -1536,
+        1712
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8d513345-6484-431f-afb7-7cf045c90f4f",
+              "name": "Done",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dedce8ba-ea01-4656-96af-e90b71f5f696",
+      "name": "Return",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        16,
+        2320
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.download_url }}",
+        "options": {}
+      },
+      "id": "1bf1858e-d1a5-47b7-a161-b420474da34c",
+      "name": "Get File",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -896,
+        2192
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 1,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "45ce825e-9fa6-430c-8931-9aaf22c42585",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.content }}",
+              "rightValue": ""
+            },
+            {
+              "id": "9619a55f-7fb1-4f24-b1a7-7aeb82365806",
+              "operator": {
+                "type": "string",
+                "operation": "notExists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.error }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "242f5512-9e5f-4438-8c27-5cab7962637d",
+      "name": "If file too large",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -1088,
+        2224
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {},
+      "id": "3c9ce091-50f8-4862-a38a-e98bc7d636d2",
+      "name": "Merge Items",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        -1088,
+        2480
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "const orderJsonKeys = (jsonObj) => {\n  const ordered = {};\n  Object.keys(jsonObj).sort().forEach(key => {\n    ordered[key] = jsonObj[key];\n  });\n  return ordered;\n}\n\n// Check if file returned with content\nif (Object.keys($input.all()[0].json).includes(\"content\")) {\n  // Decode base64 content and parse JSON\n  const origWorkflow = JSON.parse(Buffer.from($input.all()[0].json.content, 'base64').toString());\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n// No file returned / new workflow\n} else if (Object.keys($input.all()[0].json).includes(\"data\")) {\n  const origWorkflow = JSON.parse($input.all()[0].json.data);\n  const n8nWorkflow = $input.all()[1].json;\n  \n  // Order JSON objects\n  const orderedOriginal = orderJsonKeys(origWorkflow);\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n\n  // Determine difference\n  if (JSON.stringify(orderedOriginal) === JSON.stringify(orderedActual)) {\n    $input.all()[0].json.github_status = \"same\";\n  } else {\n    $input.all()[0].json.github_status = \"different\";\n    $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n  }\n  $input.all()[0].json.content_decoded = orderedOriginal;\n\n} else {\n  // Order JSON object\n  const n8nWorkflow = $input.all()[1].json;\n  const orderedActual = orderJsonKeys(n8nWorkflow);\n  \n  // Proper formatting\n  $input.all()[0].json.github_status = \"new\";\n  $input.all()[0].json.n8n_data_stringy = JSON.stringify(orderedActual, null, 2);\n}\n\n// Return items\nreturn $input.all();"
+      },
+      "id": "237fbf91-e514-4261-ae1a-1749c41d4e07",
+      "name": "isDiffOrNew",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -896,
+        2480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{$json.github_status}}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "same"
+            },
+            {
+              "value2": "different",
+              "output": 1
+            },
+            {
+              "value2": "new",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "9b43f9da-88f6-4522-b6e8-a0151884f27d",
+      "name": "Check Status",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -672,
+        2480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "cb6d4f0f-67e6-4a23-a63a-51761a070ff1",
+      "name": "Same file - Do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        -448,
+        2320
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "423de631-c09c-43a7-b321-3da858686b30",
+      "name": "File is different",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        -448,
+        2480
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "efab868d-8dc8-47b7-98dd-96c8c41a9f88",
+      "name": "File is new",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        -448,
+        2640
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.name }}"
+        },
+        "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Execute Workflow Trigger').first().json.id}}.json",
+        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "={{$('Execute Workflow Trigger').first().json.name}} ({{$json.github_status}})"
+      },
+      "id": "15958a51-799b-4a58-b6b7-88f8a943f9d1",
+      "name": "Create new file",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -224,
+        2640
+      ],
+      "typeVersion": 1,
+      "webhookId": "fe01e015-a60a-45f8-9002-32de298fe9b7",
+      "credentials": {
+        "githubApi": {
+          "id": "SwnpAoxpZKJZ18dI",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.name }}"
+        },
+        "filePath": "={{ $('Globals').item.json.repo.path }}{{$('Execute Workflow Trigger').first().json.id}}.json",
+        "fileContent": "={{$('isDiffOrNew').item.json[\"n8n_data_stringy\"]}}",
+        "commitMessage": "={{$('Execute Workflow Trigger').first().json.name}} ({{$json.github_status}})"
+      },
+      "id": "01504380-5a25-4b35-bd8c-c72312f65fe9",
+      "name": "Edit existing file",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -224,
+        2464
+      ],
+      "typeVersion": 1,
+      "webhookId": "e88d8c51-c17e-4dca-9c47-f89076ef5857",
+      "credentials": {
+        "githubApi": {
+          "id": "SwnpAoxpZKJZ18dI",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $json.repo.name }}"
+        },
+        "filePath": "={{ $json.repo.path }}{{ $('Execute Workflow Trigger').item.json.id }}.json",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "id": "7c15a8d1-4204-4e08-a980-d2507d745786",
+      "name": "Get file data",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        -1296,
+        2224
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "webhookId": "0fcbbec5-baa4-405b-b055-73e48319fc64",
+      "credentials": {
+        "githubApi": {
+          "id": "SwnpAoxpZKJZ18dI",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "008834235"
+            },
+            {
+              "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
+              "name": "repo.name",
+              "type": "string",
+              "value": "n8n-Project"
+            },
+            {
+              "id": "81c4dc54-86bf-4432-a23f-22c7ea831e74",
+              "name": "repo.path",
+              "type": "string",
+              "value": "=workflows/{{ $json.tags[0].name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ac45253d-8de0-4bfe-8cf5-3b7fea155a35",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1504,
+        2384
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "699e19c1-943d-4e01-ab97-16ac193e8c0d",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -2224,
+        2560
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "12cad226-e091-4bbb-aed9-a8e01311772c",
+              "name": "tags[0].name",
+              "type": "string",
+              "value": "={{ $('Execute Workflow Trigger').item.json.tags[0].name }}/"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "afdf20c9-db79-4dba-82d2-2035c96c81c5",
+      "name": "/",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1744,
+        2272
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.tags[0] }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "tag"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "2656fbe3-fe35-4770-9c03-9a455ec618e4",
+                    "operator": {
+                      "type": "object",
+                      "operation": "notExists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.tags[0] }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "none"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1e503482-ed62-46b0-aa76-d250b72e2757",
+      "name": "tag?",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -1984,
+        2384
+      ],
+      "typeVersion": 3.2
     }
   ],
   "pinData": {},
@@ -977,9 +1869,13 @@
       "projectId": "IFQa0QO9npFMEMmz"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2025-12-01T00:18:55.000Z",
-  "versionId": "c23e6d75-433c-4828-823f-c9a8bdf93975"
+  "triggerCount": 2,
+  "updatedAt": "2025-12-03T02:54:07.000Z",
+  "versionId": "11b8b84e-41b1-4b7e-a966-780a5a31a147"
 }
